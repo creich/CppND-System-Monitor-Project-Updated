@@ -26,6 +26,7 @@ class System {
   // caching some 'stable' information instead of reparsing the files all the time
   std::string kernel_ = "";
   std::string operatingSystem_ = "";
+  float totalMemory_ = 0;
 };
 
 #endif

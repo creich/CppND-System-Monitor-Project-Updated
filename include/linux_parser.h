@@ -19,7 +19,7 @@ const std::string kOSPath{"/etc/os-release"};
 const std::string kPasswordPath{"/etc/passwd"};
 
 // System
-float MemoryUtilization();
+float MemoryUtilization(std::string param = "MemInfo");
 long UpTime();
 std::vector<int> Pids();
 int TotalProcesses();

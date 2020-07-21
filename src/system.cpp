@@ -28,8 +28,13 @@ std::string System::Kernel() {
     return kernel_;
 }
 
-// TODO: Return the system's memory utilization
-float System::MemoryUtilization() { return 0.0; }
+// DONE: Return the system's memory utilization
+float System::MemoryUtilization() {
+    if (totalMemory_ == 0) totalMemory_ = LinuxParser::MemoryUtilization("MemTotal");
+    float memFree = LinuxParser::MemoryUtilization("MemFree");
+
+    return (totalMemory_ - memFree) / totalMemory_;
+}
 
 // DONE: Return the operating system name
 std::string System::OperatingSystem() {

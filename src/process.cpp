@@ -50,10 +50,11 @@ long int Process::UpTime() const {
 // DONE: Overload the "less than" comparison operator for Process objects
 // REMOVE: [[maybe_unused]] once you define the function
 bool Process::operator<(Process const& a) const {
-    return pid_ > a.pid_;   // intentionally turned around to see other processes than init per default
+    // intentionally turned around to see other processes than init per default
+    return std::stoi(this->Ram(), nullptr) > std::stoi(a.Ram(), nullptr);
 
 // possible variants:
+//    return pid_ > a.pid_;   // intentionally turned around to see other processes than init per default
 //    return pid_ < a.pid_;
-//    return this->Ram() > a.Ram();
 //    return this->UpTime() > a.UpTime();
 }

@@ -45,6 +45,9 @@ vector<Process>& System::Processes() {
         }
     }
 
+    // sort newProcessList
+    std::sort(newProcessList.begin(), newProcessList.end());
+
     // remove old list and return the new one instead
     processes_.swap(newProcessList);
     return processes_;

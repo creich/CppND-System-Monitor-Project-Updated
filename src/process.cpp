@@ -27,7 +27,7 @@ string Process::Command() {
 }
 
 // DONE: Return this process's memory utilization
-string Process::Ram() {
+string Process::Ram() const {
     return std::to_string(LinuxParser::Ram(pid_) / 1024);
 }
 
@@ -42,11 +42,18 @@ string Process::User() {
 }
 
 // DONE: Return the age of this process (in seconds)
-long int Process::UpTime() {
+long int Process::UpTime() const {
     //     System::UpTime   - process started at clockTicks after boot / sysconf(_SC_CLK_TCK)
     return System::UpTime() - LinuxParser::UpTime(pid_) / sysconf(_SC_CLK_TCK);
 }
 
-// TODO: Overload the "less than" comparison operator for Process objects
+// DONE: Overload the "less than" comparison operator for Process objects
 // REMOVE: [[maybe_unused]] once you define the function
-bool Process::operator<(Process const& a[[maybe_unused]]) const { return true; }
+bool Process::operator<(Process const& a) const {
+    return pid_ > a.pid_;   // intentionally turned around to see other processes than init per default
+
+// possible variants:
+//    return pid_ < a.pid_;
+//    return this->Ram() > a.Ram();
+//    return this->UpTime() > a.UpTime();
+}

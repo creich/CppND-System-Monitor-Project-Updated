@@ -49,7 +49,7 @@ long IdleJiffies();
 
 // Processes
 std::string Command(int pid);
-int ProcessStat(int pid, std::string param);
+int ProcessStatus(int pid, std::string param);
 int Ram(int pid);
 int Uid(int pid);
 std::string User(int pid);

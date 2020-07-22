@@ -172,7 +172,7 @@ string LinuxParser::Command(int pid) {
     return string();
 }
 
-int LinuxParser::ProcessStat(int pid, std::string param) {
+int LinuxParser::ProcessStatus(int pid, std::string param) {
     string line;
     string key;
     int value = 0;
@@ -195,13 +195,13 @@ int LinuxParser::ProcessStat(int pid, std::string param) {
 // DONE: Read and return the memory used by a process
 // REMOVE: [[maybe_unused]] once you define the function
 int LinuxParser::Ram(int pid) {
-    return ProcessStat(pid, "VmSize");
+    return ProcessStatus(pid, "VmSize");
 }
 
 // DONE: Read and return the user ID associated with a process
 // REMOVE: [[maybe_unused]] once you define the function
 int LinuxParser::Uid(int pid) {
-    return ProcessStat(pid, "Uid");
+    return ProcessStatus(pid, "Uid");
 }
 
 // DONE: Read and return the user associated with a process

@@ -133,7 +133,7 @@ std::vector<float> LinuxParser::CpuUtilization() {
     return {};
 }
 
-int LinuxParser::ProcessStats(std::string param) {
+int LinuxParser::ProcStat(std::string param) {
     string key;
     int value;
     string line;
@@ -151,12 +151,12 @@ int LinuxParser::ProcessStats(std::string param) {
 
 // DONE: Read and return the total number of processes
 int LinuxParser::TotalProcesses() {
-    return ProcessStats("processes");
+    return ProcStat("processes");
 }
 
 // DONE: Read and return the number of running processes
 int LinuxParser::RunningProcesses() {
-    return ProcessStats("procs_running");
+    return ProcStat("procs_running");
 }
 
 // DONE: Read and return the command associated with a process
@@ -172,13 +172,7 @@ string LinuxParser::Command(int pid) {
     return string();
 }
 
-// TODO: Read and return the memory used by a process
-// REMOVE: [[maybe_unused]] once you define the function
-string LinuxParser::Ram(int pid[[maybe_unused]]) { return string(); }
-
-// DONE: Read and return the user ID associated with a process
-// REMOVE: [[maybe_unused]] once you define the function
-int LinuxParser::Uid(int pid) {
+int LinuxParser::ProcessStat(int pid, std::string param) {
     string line;
     string key;
     int value = 0;
@@ -188,7 +182,7 @@ int LinuxParser::Uid(int pid) {
         std::remove(line.begin(), line.end(), ':');
         std::istringstream linestream(line);
         if (linestream >> key >> value) {
-          if (key == "Uid") {
+          if (key == param) {
             return value;
           }
         }
@@ -196,6 +190,18 @@ int LinuxParser::Uid(int pid) {
     }
 
     return 0;
+}
+
+// DONE: Read and return the memory used by a process
+// REMOVE: [[maybe_unused]] once you define the function
+int LinuxParser::Ram(int pid) {
+    return ProcessStat(pid, "VmSize");
+}
+
+// DONE: Read and return the user ID associated with a process
+// REMOVE: [[maybe_unused]] once you define the function
+int LinuxParser::Uid(int pid) {
+    return ProcessStat(pid, "Uid");
 }
 
 // DONE: Read and return the user associated with a process

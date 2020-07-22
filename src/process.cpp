@@ -25,8 +25,10 @@ string Process::Command() {
     return command_;
 }
 
-// TODO: Return this process's memory utilization
-string Process::Ram() { return string(); }
+// DONE: Return this process's memory utilization
+string Process::Ram() {
+    return std::to_string(LinuxParser::Ram(pid_) / 1024);
+}
 
 // DONE: Return the user (name) that generated this process
 string Process::User() {

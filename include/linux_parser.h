@@ -22,7 +22,7 @@ const std::string kPasswordPath{"/etc/passwd"};
 float MemoryUtilization(std::string param = "MemInfo");
 long UpTime();
 std::vector<int> Pids();
-int ProcessStats(std::string param);
+int ProcStat(std::string param);
 int TotalProcesses();
 int RunningProcesses();
 std::string OperatingSystem();
@@ -49,7 +49,8 @@ long IdleJiffies();
 
 // Processes
 std::string Command(int pid);
-std::string Ram(int pid);
+int ProcessStat(int pid, std::string param);
+int Ram(int pid);
 int Uid(int pid);
 std::string User(int pid);
 long int UpTime(int pid);

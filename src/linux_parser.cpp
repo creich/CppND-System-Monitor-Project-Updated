@@ -237,17 +237,14 @@ long LinuxParser::UpTime(int pid) {
     if (filestream.is_open()) {
       if (std::getline(filestream, line)) {
         std::istringstream linestream(line);
-        // skip the first 3 entries (consisting of mixed types 'int' and 'string'
-        linestream.ignore(256,' ');   // ignore until space
-        linestream.ignore(256,' ');   // ignore until space
-        linestream.ignore(256,' ');   // ignore until space
-        int counter = 4;
-;        while (linestream >> value) {
-          if (counter == 22)
-              return value;
-
-          counter++;
+        // skip the first 21 entries (first 3 consisting of mixed types 'int'
+        // and 'string'). rest is just not useful atm.
+        int counter = 1;
+        while (counter <= 21 && linestream.ignore(256, ' ')) {
+            counter++;
         }
+        if (linestream >> value)
+            return value;
       }
     }
 

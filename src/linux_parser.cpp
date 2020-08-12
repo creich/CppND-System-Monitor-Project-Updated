@@ -242,7 +242,7 @@ long LinuxParser::UpTime(int pid) {
         linestream.ignore(256,' ');   // ignore until space
         linestream.ignore(256,' ');   // ignore until space
         int counter = 4;
-;        while (linestream >> value) {
+        while (linestream >> value) {
           if (counter == 22)
               return value;
 
@@ -252,4 +252,27 @@ long LinuxParser::UpTime(int pid) {
     }
 
     return 0;
+}
+
+std::vector<float> LinuxParser::CpuUtilization(int pid)
+{
+    string line;
+    float utime, stime, cutime, cstime, starttime;
+    std::ifstream filestream(kProcDirectory + std::to_string(pid) + kStatFilename);
+    if (filestream.is_open()) {
+      if (std::getline(filestream, line)) {
+        std::istringstream linestream(line);
+        for (int i=0; i<14; i++) {
+            linestream.ignore(256,' ');   // ignore until space
+        }
+        linestream >> utime >> stime >> cutime >> cstime;
+        for (int i=0; i<4; i++) {
+            linestream.ignore(256,' ');   // ignore until space
+        }
+        linestream >> starttime;
+        return {utime, stime, cutime, cstime, starttime};
+      }
+    }
+
+    return {};
 }

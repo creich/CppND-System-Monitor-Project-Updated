@@ -48,6 +48,7 @@ long ActiveJiffies(int pid);
 long IdleJiffies();
 
 // Processes
+std::vector<float> CpuUtilization(int pid);
 std::string Command(int pid);
 int ProcessStatus(int pid, std::string param);
 int Ram(int pid);

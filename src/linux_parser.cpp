@@ -193,7 +193,8 @@ int LinuxParser::ProcessStatus(int pid, std::string param) {
 }
 
 // DONE: Read and return the memory used by a process
-// REMOVE: [[maybe_unused]] once you define the function
+// used VmSize before (as stated within the project) but liked the suggestion of the mentor
+//  to show real memory usage instead of virtual memory
 int LinuxParser::Ram(int pid) {
     return ProcessStatus(pid, "VmData");
 }

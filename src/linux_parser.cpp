@@ -195,7 +195,7 @@ int LinuxParser::ProcessStatus(int pid, std::string param) {
 // DONE: Read and return the memory used by a process
 // REMOVE: [[maybe_unused]] once you define the function
 int LinuxParser::Ram(int pid) {
-    return ProcessStatus(pid, "VmSize");
+    return ProcessStatus(pid, "VmData");
 }
 
 // DONE: Read and return the user ID associated with a process

@@ -226,7 +226,7 @@ string LinuxParser::User(int pid) {
       }
     }
 
-    return "";
+    return string();
 }
 
 // DONE: Read and return the uptime of a process
